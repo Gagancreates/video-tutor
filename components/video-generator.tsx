@@ -66,7 +66,7 @@ export default function VideoGenerator() {
                 <h1 className="font-bold text-4xl md:text-6xl text-white mb-6 leading-tight">
                   What would you like to{" "}
                   <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    teach today?
+                    learn today?
                   </span>
                 </h1>
                 <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">

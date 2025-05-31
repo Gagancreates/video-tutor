@@ -167,11 +167,51 @@
     #a78bfa 75%,
     #60a5fa 100%
   );
+  opacity: 0.9;
+}
+
+/* Enhanced AI Tutor text glow - more subtle version */
+.ai-tutor-text {
+  --glow-color: rgba(139, 92, 246, 0.3);
+  position: relative;
+  text-shadow: 
+    0 0 5px var(--glow-color),
+    0 0 10px var(--glow-color);
+  filter: brightness(1.05);
+  letter-spacing: 0.01em;
+}
+
+.ai-tutor-text::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(45deg, #6366f1, #8b5cf6, #3b82f6, #0ea5e9);
+  background-size: 400%;
+  border-radius: 10px;
+  filter: blur(15px) opacity(0.25);
+  animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+/* Custom letter spacing for aesthetic typography */
+.aesthetic-text {
+  letter-spacing: -0.02em;
+  font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* This ensures content isn't hidden behind fixed headers */
 }
 
 /* Better font rendering */

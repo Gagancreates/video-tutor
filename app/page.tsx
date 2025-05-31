@@ -5,22 +5,16 @@ import { ArrowRight, Github, Play, Sparkles, Brain, Zap, Users, BookOpen, Trendi
 import Link from "next/link"
 import { motion } from "framer-motion"
 import VideoGenerator from "@/components/video-generator"
-import Image from "next/image"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden font-inter">
-      {/* Enhanced animated background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(79,70,229,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(79,70,229,0.03)_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.15),transparent_50%)] opacity-30" />
-
-      {/* Enhanced gradient orbs */}
-      <div className="absolute top-0 left-1/4 w-[35rem] h-[35rem] bg-blue-600/10 rounded-full blur-3xl opacity-60 animate-pulse" />
-      <div className="absolute top-1/3 right-1/4 w-[30rem] h-[30rem] bg-purple-600/10 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" />
-      <div className="absolute -bottom-64 left-1/3 w-[40rem] h-[40rem] bg-cyan-600/10 rounded-full blur-3xl opacity-60 animate-pulse delay-2000" />
-      
-      {/* New purple glow from bottom right with custom animation */}
-      <div className="absolute bottom-0 right-0 w-[45rem] h-[45rem] bg-purple-700/15 rounded-full blur-3xl animate-glow-pulse" />
+    <div 
+      className="min-h-screen relative overflow-hidden font-inter bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/images/newbg.png')",
+      }}
+    >
+      {/* No overlays here - just the pure background image */}
 
       <header className="relative z-10 container mx-auto px-6 py-6 flex items-center justify-between">
         <motion.div 
@@ -92,28 +86,32 @@ export default function Home() {
                 <span className="text-blue-300 text-sm font-medium">Revolutionizing Education with AI</span>
               </motion.div>
 
-              <h1 className="font-medium text-5xl md:text-7xl lg:text-7xl text-white mb-8 leading-tight tracking-tight [text-shadow:0_0_25px_rgba(79,70,229,0.2)] relative">
+              <h1 className="font-medium text-5xl md:text-7xl lg:text-7xl text-white mb-8 leading-tight tracking-tight relative aesthetic-text">
                 <span className="absolute -inset-1 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 rounded-3xl blur-3xl -z-10"></span>
                 Your Personal{" "}
-                <span className="bg-clip-text text-transparent drop-shadow-sm animate-text-shimmer">
+                <span className="bg-clip-text text-transparent drop-shadow-sm animate-text-shimmer ai-tutor-text inline-block">
                   AI Video Tutor
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed tracking-wide">
+              <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed tracking-wide aesthetic-text">
                 Transform your learning experience with AI-powered video lessons tailored just for you. 
                 Master any subject with personalized, engaging visual content.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-                <Button className="bg-blue-600 hover:bg-blue-500 text-white rounded-2xl h-16 px-10 text-lg font-semibold shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden">
+                <Button 
+                  className="bg-blue-600 hover:bg-blue-500 text-white rounded-2xl h-16 px-10 text-lg font-semibold shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden"
+                  onClick={() => window.location.href = '/learn'}
+                >
                   <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
-                  Start Learning Now
+                  <span className="aesthetic-text">Start Learning Now</span>
                   <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
                   variant="ghost"
-                  className="text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl h-16 px-10 text-lg border border-gray-700 backdrop-blur-sm transition-all duration-300"
+                  className="text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl h-16 px-10 text-lg border border-gray-700 backdrop-blur-sm transition-all duration-300 aesthetic-text"
+                  onClick={() => window.location.href = '#demo'}
                 >
                   <Play className="mr-3 h-5 w-5" />
                   Watch Demo
@@ -151,11 +149,33 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1 }}
               className="mt-40 relative"
+              id="video-generator"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-purple-500/5 -z-10 rounded-3xl blur-xl" />
               <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl border border-gray-800 shadow-2xl backdrop-blur-sm overflow-hidden">
                 <div className="p-8 md:p-12">
                   <VideoGenerator />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Demo Video Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mt-24 relative"
+              id="demo"
+            >
+              <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl border border-gray-800 shadow-2xl backdrop-blur-sm overflow-hidden">
+                <div className="p-8 md:p-12">
+                  <h3 className="text-2xl font-bold text-white mb-6">Watch How It Works</h3>
+                  <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl border border-blue-500/20 flex items-center justify-center overflow-hidden group-hover:border-blue-500/30 transition-all duration-300">
+                    <div className="relative size-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-white/20 transition-all duration-300">
+                      <Play className="h-8 w-8 text-white ml-1" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
