@@ -1,15 +1,17 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import P5Renderer from './P5Renderer';
 
 interface AudioPlayerProps {
   audioUrl?: string;
   isPlaying: boolean;
   onPlayPause: (isPlaying: boolean) => void;
   onEnded: () => void;
+  p5jsCode: string;
 }
 
-const AudioPlayer = ({ audioUrl, isPlaying, onPlayPause, onEnded }: AudioPlayerProps) => {
+const AudioPlayer = ({ audioUrl, isPlaying, onPlayPause, onEnded, p5jsCode }: AudioPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -76,6 +78,12 @@ const AudioPlayer = ({ audioUrl, isPlaying, onPlayPause, onEnded }: AudioPlayerP
 
   return (
     <div className="w-full bg-gray-800 rounded-lg p-4 text-white">
+      <div className="flex flex-col justify-center items-center mb-4">
+        <div className="w-full max-w-full flex justify-center">
+          <P5Renderer code={p5jsCode} isPlaying={isPlaying} />
+        </div>
+      </div>
+      
       {audioUrl ? (
         <>
           <audio

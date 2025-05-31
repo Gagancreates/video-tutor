@@ -16,6 +16,70 @@ export default function LearnPage() {
   const [currentSection, setCurrentSection] = useState('intro');
   const [needsApiKeys, setNeedsApiKeys] = useState(false);
 
+  // Test P5.js example
+  const loadTestExample = () => {
+    const testCode = `
+    p.setup = function() {
+      p.createCanvas(600, 350);
+      p.background(0);
+      
+      // Draw a border to check alignment
+      p.stroke(255, 0, 0);
+      p.strokeWeight(4);
+      p.noFill();
+      p.rect(2, 2, p.width-4, p.height-4);
+      
+      p.noStroke();
+      p.fill(255);
+      p.textSize(24);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text("P5.js is working! Move your mouse around.", p.width/2, p.height/2);
+      
+      // Draw alignment markers
+      p.fill(0, 255, 0);
+      p.rect(p.width/2 - 5, 0, 10, 10); // Top center
+      p.rect(p.width - 10, p.height/2 - 5, 10, 10); // Right center
+      p.rect(p.width/2 - 5, p.height - 10, 10, 10); // Bottom center
+      p.rect(0, p.height/2 - 5, 10, 10); // Left center
+    };
+    
+    p.draw = function() {
+      // Slowly fade background but preserve the border and markers
+      p.fill(0, 15);
+      p.rect(10, 10, p.width-20, p.height-20);
+      
+      // Calculate colors based on mouse position
+      let r = p.map(p.mouseX, 0, p.width, 50, 255);
+      let g = p.map(p.mouseY, 0, p.height, 50, 255);
+      let b = p.map(p.mouseX + p.mouseY, 0, p.width + p.height, 50, 255);
+      
+      // Draw a circle where the mouse is
+      p.fill(r, g, b, 200);
+      let size = p.sin(p.frameCount * 0.05) * 10 + 30;
+      p.ellipse(p.mouseX, p.mouseY, size, size);
+      
+      // Draw some text at the top
+      p.fill(255);
+      p.textSize(14);
+      p.text("Canvas should be centered with red border visible", p.width/2, 30);
+    };
+    `;
+    
+    setP5jsCode(testCode);
+    setScript({
+      intro: "This is a test visualization showing that P5.js is working correctly. The colorful circle follows your mouse movement.",
+      frames: [{
+        time: "0-5s",
+        narration: "Move your mouse around to see the interactive elements. The circle changes color based on your mouse position."
+      }],
+      conclusion: "If you can see the animation centered in the display area, P5.js is working correctly."
+    });
+    
+    // Generate test audio
+    generateAudio("This is a test visualization showing that P5.js is working correctly. The colorful circle follows your mouse movement.");
+    setCurrentSection('intro');
+  };
+
   // Check if API keys are configured
   useEffect(() => {
     const checkApiKeys = async () => {
@@ -83,6 +147,7 @@ export default function LearnPage() {
       }
       
       const generateData = await generateResponse.json();
+      console.log('P5.js code received:', generateData.p5jsCode?.substring(0, 100) + '...');
       setP5jsCode(generateData.p5jsCode);
       setScript(generateData.script);
       
@@ -191,6 +256,15 @@ export default function LearnPage() {
                   {loading ? 'Generating...' : 'Generate Tutorial'}
                 </button>
               </div>
+              <div className="mt-2 flex justify-end">
+                <button
+                  type="button"
+                  onClick={loadTestExample}
+                  className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 transition-colors"
+                >
+                  🧪 Test P5.js Renderer
+                </button>
+              </div>
               {error && (
                 <p className="mt-2 text-red-500">{error}</p>
               )}
@@ -206,9 +280,12 @@ export default function LearnPage() {
             
             {p5jsCode && (
               <div className="space-y-6">
-                <P5Renderer code={p5jsCode} isPlaying={isPlaying} />
+                {/* <div className="flex justify-center items-center">
+                  <P5Renderer code={p5jsCode} isPlaying={isPlaying} />
+                </div> */}
                 
                 <AudioPlayer
+                  p5jsCode={p5jsCode}
                   audioUrl={audioUrl}
                   isPlaying={isPlaying}
                   onPlayPause={setIsPlaying}
