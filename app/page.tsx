@@ -201,7 +201,7 @@ export default function Home() {
       <main className="relative z-10">
         <>
           {/* Hero Section - Optimized for mobile and desktop */}
-          <section className="container mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-6">
+          <section className="container mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -244,7 +244,7 @@ export default function Home() {
                             placeholder={isMobile ? 
                               "What would you like to learn today?" : 
                               "What would you like to learn today? e.g. Explain me Quadratic Equations..."}
-                            className="h-14 sm:h-20 text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70"
+                            className="h-12 sm:h-20 md:h-20 text-base lg:text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70 md:placeholder:pt- md:placeholder:leading-tight"
                             value={searchTopic}
                             onChange={(e) => setSearchTopic(e.target.value)}
                             onKeyPress={(e) => {
