@@ -178,21 +178,167 @@ export default function Home() {
                       </Button>
                     </div>
                     
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-                      {["Quantum Physics", "Climate Change", "Ancient Rome"].map(
-                        (example, index) => (
-                          <motion.button
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + index * 0.1 }}
-                            onClick={() => setSearchTopic(example)}
-                            className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm"
+                    <div className="mt-8 w-full mx-auto relative py-6">
+                      <p className="text-gray-400 text-sm mb-4 text-center">Try asking about...</p>
+                      
+                      {/* Container with masks for fading effect */}
+                      <div className="relative w-full overflow-hidden h-24">
+                        {/* Left fade mask */}
+                        <div className="absolute left-0 top-0 w-20 h-full z-10 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+                        
+                        {/* Right fade mask */}
+                        <div className="absolute right-0 top-0 w-20 h-full z-10 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+                        
+                        {/* First row - moving left to right */}
+                        <div className="relative w-full h-10 mb-4 overflow-hidden">
+                          <motion.div 
+                            className="flex gap-4 absolute"
+                            animate={{ 
+                              x: ["-100%", "0%"], 
+                            }}
+                            transition={{ 
+                              x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: 40,
+                                ease: "linear"
+                              }
+                            }}
                           >
-                            {example}
-                          </motion.button>
-                        ),
-                      )}
+                            {[
+                              "Explain quadratic equations",
+                              "What is photosynthesis?",
+                              "How do neurons work?",
+                              "Explain the water cycle",
+                              "What is the Big Bang theory?",
+                              "How does blockchain work?",
+                              "Explain Laplace transforms",
+                              "What is mitosis?",
+                            ].map((example, index) => (
+                              <motion.button
+                                key={index}
+                                className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm whitespace-nowrap"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(96, 165, 250, 0.5)" }}
+                                onClick={() => setSearchTopic(example)}
+                              >
+                                {example}
+                              </motion.button>
+                            ))}
+                          </motion.div>
+
+                          {/* Duplicate first row for seamless loop */}
+                          <motion.div 
+                            className="flex gap-4 absolute"
+                            animate={{ 
+                              x: ["0%", "100%"], 
+                            }}
+                            transition={{ 
+                              x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: 40,
+                                ease: "linear"
+                              }
+                            }}
+                          >
+                            {[
+                              "Explain quadratic equations",
+                              "What is photosynthesis?",
+                              "How do neurons work?",
+                              "Explain the water cycle",
+                              "What is the Big Bang theory?",
+                              "How does blockchain work?",
+                              "Explain Laplace transforms",
+                              "What is mitosis?",
+                            ].map((example, index) => (
+                              <motion.button
+                                key={index}
+                                className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm whitespace-nowrap"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(96, 165, 250, 0.5)" }}
+                                onClick={() => setSearchTopic(example)}
+                              >
+                                {example}
+                              </motion.button>
+                            ))}
+                          </motion.div>
+                        </div>
+                        
+                        {/* Second row - moving right to left, with different examples */}
+                        <div className="relative w-full h-10 overflow-hidden">
+                          <motion.div 
+                            className="flex gap-4 absolute"
+                            animate={{ 
+                              x: ["0%", "-100%"], 
+                            }}
+                            transition={{ 
+                              x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: 40,
+                                ease: "linear"
+                              }
+                            }}
+                          >
+                            {[
+                              "What caused the French Revolution?",
+                              "How do vaccines work?",
+                              "Explain quantum entanglement",
+                              "What is machine learning?",
+                              "How do black holes form?",
+                              "Explain the theory of relativity",
+                              "What is DNA replication?",
+                              "How does the internet work?",
+                              "What is the Pythagorean theorem?",
+                            ].map((example, index) => (
+                              <motion.button
+                                key={index}
+                                className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm whitespace-nowrap"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(124, 58, 237, 0.5)" }}
+                                onClick={() => setSearchTopic(example)}
+                              >
+                                {example}
+                              </motion.button>
+                            ))}
+                          </motion.div>
+
+                          {/* Duplicate second row for seamless loop */}
+                          <motion.div 
+                            className="flex gap-4 absolute"
+                            animate={{ 
+                              x: ["100%", "0%"], 
+                            }}
+                            transition={{ 
+                              x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: 40,
+                                ease: "linear"
+                              }
+                            }}
+                          >
+                            {[
+                              "What caused the French Revolution?",
+                              "How do vaccines work?",
+                              "Explain quantum entanglement",
+                              "What is machine learning?",
+                              "How do black holes form?",
+                              "Explain the theory of relativity",
+                              "What is DNA replication?",
+                              "How does the internet work?",
+                              "What is the Pythagorean theorem?",
+                            ].map((example, index) => (
+                              <motion.button
+                                key={index}
+                                className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm whitespace-nowrap"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(124, 58, 237, 0.5)" }}
+                                onClick={() => setSearchTopic(example)}
+                              >
+                                {example}
+                              </motion.button>
+                            ))}
+                          </motion.div>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 ) : null}
@@ -343,20 +489,7 @@ export default function Home() {
                 transition={{ delay: 1.2, duration: 0.8 }}
                 className="hidden md:flex flex-col items-center mt-4 gap-2"
               >
-                <span className="text-gray-500 text-sm">Scroll to explore</span>
-                <div className="h-12 w-6 border border-gray-700 rounded-full flex items-start justify-center p-1.5">
-                  <motion.div 
-                    className="h-2 w-2 bg-blue-400 rounded-full"
-                    animate={{ 
-                      y: [0, 16, 0],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </div>
+                
               </motion.div>
             </motion.div>
 
