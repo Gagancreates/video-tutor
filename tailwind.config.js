@@ -79,12 +79,20 @@ module.exports = {
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        "float": {
+          "0%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+          "100%": { transform: "translateY(0px)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "text-shimmer": "text-shimmer 8s infinite",
         "glow": "glow 8s linear infinite",
+        "float-slow": "float 8s ease-in-out infinite",
+        "float-medium": "float 6s ease-in-out infinite",
+        "float-fast": "float 4s ease-in-out infinite",
       },
     },
   },
