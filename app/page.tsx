@@ -104,7 +104,7 @@ export default function Home() {
       <main className="relative z-10">
         <>
           {/* Hero Section - Adjusted to fit screen properly */}
-          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-10">
+          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -142,20 +142,31 @@ export default function Home() {
                     exit={{ opacity: 0, y: -30 }}
                   >
                     <div className="max-w-2xl mx-auto mb-8">
-                      <div className="relative">
-                        <Input
-                          placeholder="What would you like to learn today? e.g. Quantum Physics, French Revolution..."
-                          className="h-16 text-lg rounded-2xl border-gray-700 bg-gray-900/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm"
-                          value={searchTopic}
-                          onChange={(e) => setSearchTopic(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter" && searchTopic.trim()) {
-                              handleGenerate();
-                            }
-                          }}
-                        />
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10 opacity-50" />
-                      </div>
+                                              <div className="relative group">
+                          <Input
+                            placeholder="What would you like to learn today? e.g. Explain me Quadratic Equations..."
+                            className="h-20 text-xl rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70"
+                            value={searchTopic}
+                            onChange={(e) => setSearchTopic(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter" && searchTopic.trim()) {
+                                handleGenerate();
+                              }
+                            }}
+                          />
+                          {/* Glow effect - more subtle */}
+                          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl -z-10 opacity-30 group-hover:opacity-40 transition-opacity duration-300" />
+                          
+                          {/* Animated subtle glow border - more subtle */}
+                          <div className="absolute inset-0 -z-10 rounded-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-300">
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-blue-500/15 bg-[length:200%_100%] rounded-3xl animate-glow"></div>
+                          </div>
+
+                          {/* Sparkle icon inside input */}
+                          <div className="absolute right-6 top-1/2 -translate-y-1/2 text-blue-400/50 group-hover:text-blue-400/70 transition-colors duration-300">
+                            <Sparkles className="h-6 w-6" />
+                          </div>
+                        </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
