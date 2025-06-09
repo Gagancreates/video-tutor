@@ -1,12 +1,47 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Play, Sparkles, Brain, Zap, Users, BookOpen, TrendingUp, ChevronRight } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { ArrowRight, Github, Play, Sparkles, Brain, Zap, Users, BookOpen, TrendingUp, ChevronRight, Loader2 } from "lucide-react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import VideoGenerator from "@/components/video-generator"
+import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
+  const [searchTopic, setSearchTopic] = useState("")
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generationStep, setGenerationStep] = useState(0)
+  const router = useRouter()
+  
+  const generationSteps = [
+    { icon: Brain, title: "Analyzing Topic", description: "Understanding the educational concept" },
+    { icon: Sparkles, title: "Creating Animations", description: "Generating custom p5.js visualizations" },
+    { icon: Zap, title: "Synthesizing Voice", description: "Creating natural AI narration" },
+    { icon: Play, title: "Finalizing Video", description: "Combining all elements together" },
+  ]
+  
+  const handleGenerate = () => {
+    if (!searchTopic.trim()) return
+    
+    setIsGenerating(true)
+    setGenerationStep(0)
+    
+    // Simulate generation process with step progression
+    const stepInterval = setInterval(() => {
+      setGenerationStep((prev) => {
+        if (prev >= 3) {
+          clearInterval(stepInterval)
+          setTimeout(() => {
+            // Navigate to video player page
+            router.push(`/video?topic=${encodeURIComponent(searchTopic)}`)
+          }, 1000)
+          return prev
+        }
+        return prev + 1
+      })
+    }, 2000)
+  }
   return (
     <div 
       className="min-h-screen relative overflow-hidden font-inter bg-cover bg-center bg-no-repeat"
@@ -69,7 +104,7 @@ export default function Home() {
       <main className="relative z-10">
         <>
           {/* Hero Section - Adjusted to fit screen properly */}
-          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center">
+          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-14">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -86,7 +121,7 @@ export default function Home() {
                 <span className="text-blue-300 text-sm font-medium">Revolutionizing Education with AI</span>
               </motion.div>
 
-              <h1 className="font-medium text-5xl md:text-7xl lg:text-7xl text-white mb-8 leading-tight tracking-tight relative aesthetic-text">
+              <h1 className="font-bold text-5xl md:text-7xl lg:text-7xl text-white mb-8 leading-tight tracking-tight relative aesthetic-text">
                 <span className="absolute -inset-1 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 rounded-3xl blur-3xl -z-10"></span>
                 Your Personal{" "}
                 <span className="bg-clip-text text-transparent drop-shadow-sm animate-text-shimmer ai-tutor-text inline-block">
@@ -95,28 +130,181 @@ export default function Home() {
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed tracking-wide aesthetic-text">
-                Transform your learning experience with AI-powered video lessons tailored just for you. 
-                Master any subject with personalized, engaging visual content.
+                Learn anything, smarter. Personalized video lessons, powered by AI.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-                <Button 
-                  className="bg-blue-600 hover:bg-blue-500 text-white rounded-2xl h-16 px-10 text-lg font-semibold shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden"
-                  onClick={() => window.location.href = '/learn'}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
-                  <span className="aesthetic-text">Start Learning Now</span>
-                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl h-16 px-10 text-lg border border-gray-700 backdrop-blur-sm transition-all duration-300 aesthetic-text"
-                  onClick={() => window.location.href = '#demo'}
-                >
-                  <Play className="mr-3 h-5 w-5" />
-                  Watch Demo
-                </Button>
-              </div>
+              <AnimatePresence mode="wait">
+                {!isGenerating ? (
+                  <motion.div
+                    key="input"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                  >
+                    <div className="max-w-2xl mx-auto mb-8">
+                      <div className="relative">
+                        <Input
+                          placeholder="What would you like to learn today? e.g. Quantum Physics, French Revolution..."
+                          className="h-16 text-lg rounded-2xl border-gray-700 bg-gray-900/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm"
+                          value={searchTopic}
+                          onChange={(e) => setSearchTopic(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter" && searchTopic.trim()) {
+                              handleGenerate();
+                            }
+                          }}
+                        />
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10 opacity-50" />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                      <Button 
+                        className="bg-blue-600 hover:bg-blue-500 text-white rounded-2xl h-16 px-10 text-lg font-semibold shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden"
+                        onClick={handleGenerate}
+                        disabled={!searchTopic.trim()}
+                      >
+                        <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
+                        <Sparkles className="mr-3 h-5 w-5" />
+                        <span className="aesthetic-text">Generate Video</span>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl h-16 px-10 text-lg border border-gray-700 backdrop-blur-sm transition-all duration-300 aesthetic-text"
+                        onClick={() => window.location.href = '#videos'}
+                      >
+                        <Play className="mr-3 h-5 w-5" />
+                        Watch Demo
+                      </Button>
+                    </div>
+                    
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                      {["Quantum Physics", "Climate Change", "Ancient Rome"].map(
+                        (example, index) => (
+                          <motion.button
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 + index * 0.1 }}
+                            onClick={() => setSearchTopic(example)}
+                            className="p-3 rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-sm"
+                          >
+                            {example}
+                          </motion.button>
+                        ),
+                      )}
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="generating"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center max-w-4xl mx-auto"
+                  >
+                    <h2 className="font-bold text-3xl md:text-4xl text-white mb-4">Creating Your Educational Video</h2>
+                    <p className="text-xl text-gray-300 mb-12">
+                      Topic: <span className="text-blue-400">{searchTopic}</span>
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                      {generationSteps.map((step, index) => {
+                        const isActive = index === generationStep
+                        const isCompleted = index < generationStep
+                        const IconComponent = step.icon
+
+                        return (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0.3, scale: 0.95 }}
+                            animate={{
+                              opacity: isActive ? 1 : isCompleted ? 0.8 : 0.3,
+                              scale: isActive ? 1.05 : 1,
+                            }}
+                            className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-500 ${
+                              isActive
+                                ? "border-blue-500 bg-blue-500/10"
+                                : isCompleted
+                                  ? "border-green-500 bg-green-500/10"
+                                  : "border-gray-700 bg-gray-900/30"
+                            }`}
+                          >
+                            <div className="flex items-center gap-4">
+                              <div
+                                className={`size-12 rounded-xl flex items-center justify-center ${
+                                  isActive
+                                    ? "bg-blue-500/20 border border-blue-500/30"
+                                    : isCompleted
+                                      ? "bg-green-500/20 border border-green-500/30"
+                                      : "bg-gray-700/20 border border-gray-600/30"
+                                }`}
+                              >
+                                {isActive ? (
+                                  <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
+                                ) : (
+                                  <IconComponent
+                                    className={`h-6 w-6 ${isCompleted ? "text-green-400" : "text-gray-400"}`}
+                                  />
+                                )}
+                              </div>
+                              <div className="text-left">
+                                <h3
+                                  className={`font-semibold text-lg ${
+                                    isActive ? "text-blue-400" : isCompleted ? "text-green-400" : "text-gray-400"
+                                  }`}
+                                >
+                                  {step.title}
+                                </h3>
+                                <p className="text-gray-300 text-sm">{step.description}</p>
+                              </div>
+                            </div>
+
+                            {isActive && (
+                              <motion.div
+                                initial={{ width: "0%" }}
+                                animate={{ width: "100%" }}
+                                transition={{ duration: 2 }}
+                                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-b-2xl"
+                              />
+                            )}
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl p-8 border border-gray-800 backdrop-blur-sm mb-8"
+                    >
+                      <div className="flex items-center justify-center gap-3 mb-4">
+                        <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
+                        <span className="text-white font-medium">Processing...</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <motion.div
+                          initial={{ width: "0%" }}
+                          animate={{ width: `${((generationStep + 1) / generationSteps.length) * 100}%` }}
+                          transition={{ duration: 0.5 }}
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                        />
+                      </div>
+                      <p className="text-gray-400 text-sm mt-4 text-center">
+                        This usually takes 20-30 seconds. We're creating something amazing for you!
+                      </p>
+                    </motion.div>
+                    
+                    <Button
+                      variant="outline"
+                      className="text-gray-300 hover:text-white border-gray-600"
+                      onClick={() => setIsGenerating(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               
               {/* Scroll indicator */}
               <motion.div 
@@ -142,39 +330,60 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Video Generator Section - moved outside initial viewport */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="mt-40 relative"
-              id="video-generator"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-purple-500/5 -z-10 rounded-3xl blur-xl" />
-              <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl border border-gray-800 shadow-2xl backdrop-blur-sm overflow-hidden">
-                <div className="p-8 md:p-12">
-                  <VideoGenerator />
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Demo Video Section */}
+
+            {/* Generated Videos Gallery */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="mt-24 relative"
-              id="demo"
+              className="mt-40 relative"
+              id="videos"
             >
               <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl border border-gray-800 shadow-2xl backdrop-blur-sm overflow-hidden">
                 <div className="p-8 md:p-12">
-                  <h3 className="text-2xl font-bold text-white mb-6">Watch How It Works</h3>
-                  <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl border border-blue-500/20 flex items-center justify-center overflow-hidden group-hover:border-blue-500/30 transition-all duration-300">
-                    <div className="relative size-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-white/20 transition-all duration-300">
-                      <Play className="h-8 w-8 text-white ml-1" />
-                    </div>
+                  <div className="flex justify-between items-center mb-8">
+                    <h3 className="text-2xl font-bold text-white">Recently Generated Videos</h3>
+                    <Button variant="ghost" className="text-blue-400 hover:text-blue-300">
+                      View All <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { title: "Quantum Physics Basics", duration: "5:24", views: "2.4K", thumbnail: "/images/quantum.jpg" },
+                      { title: "Introduction to Neural Networks", duration: "8:15", views: "1.8K", thumbnail: "/images/neural.jpg" },
+                      { title: "Ancient Roman History", duration: "6:42", views: "3.2K", thumbnail: "/images/rome.jpg" },
+                      { title: "Climate Change Effects", duration: "7:30", views: "4.5K", thumbnail: "/images/climate.jpg" },
+                      { title: "Introduction to Calculus", duration: "9:18", views: "2.1K", thumbnail: "/images/calculus.jpg" },
+                      { title: "Solar System Exploration", duration: "4:55", views: "5.7K", thumbnail: "/images/solar.jpg" },
+                    ].map((video, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1, duration: 0.5 }}
+                        className="group relative cursor-pointer"
+                      >
+                        <div className="aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-gray-800 group-hover:border-blue-500/30 transition-all duration-300">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="relative size-16 bg-black/40 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:bg-blue-500/20">
+                              <Play className="h-6 w-6 text-white ml-1" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h4 className="text-white font-medium text-lg mb-1 line-clamp-1">{video.title}</h4>
+                            <div className="flex items-center gap-3 text-sm text-gray-300">
+                              <span>{video.duration}</span>
+                              <span>•</span>
+                              <span>{video.views} views</span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </div>
