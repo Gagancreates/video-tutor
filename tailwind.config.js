@@ -56,6 +56,9 @@ module.exports = {
           foreground: "var(--card-foreground)",
         },
       },
+      backgroundImage: {
+        'radial-mask': 'radial-gradient(circle at center, transparent 10%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.4) 100%)',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

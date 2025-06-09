@@ -61,45 +61,9 @@ export default function Home() {
   }
   return (
     <div 
-      className="min-h-screen relative overflow-hidden font-inter bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/images/newbg.png')",
-      }}
+      className="min-h-screen relative overflow-hidden font-inter bg-black"
     >
-      {/* Educational grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1.5px,transparent_1.5px),linear-gradient(90deg,rgba(59,130,246,0.03)_1.5px,transparent_1.5px)] bg-[size:20px_20px] opacity-60"></div>
-      
-      {/* Floating educational elements */}
-      <div className="absolute top-[15%] left-[10%] opacity-20 animate-float-slow">
-        <div className="text-blue-400/40 rotate-[15deg]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-        </div>
-      </div>
-      
-      <div className="absolute top-[25%] right-[15%] opacity-20 animate-float-medium">
-        <div className="text-purple-400/40 -rotate-[10deg]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-        </div>
-      </div>
-      
-      <div className="absolute bottom-[30%] left-[20%] opacity-20 animate-float-fast">
-        <div className="text-cyan-400/40 rotate-[5deg]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
-        </div>
-      </div>
-      
-      <div className="absolute top-[45%] right-[25%] opacity-20 animate-float-slow">
-        <div className="text-green-400/40 rotate-[20deg]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>
-        </div>
-      </div>
-      
-      <div className="absolute bottom-[20%] right-[10%] opacity-20 animate-float-medium">
-        <div className="text-yellow-400/40 -rotate-[15deg]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-        </div>
-      </div>
-      
+      {/* Background container */}
       
       <header className="relative z-20 container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex items-center justify-between">
         <motion.div 
@@ -171,7 +135,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-16 left-0 right-0 z-30 bg-gradient-to-b from-gray-900/95 to-black/95 backdrop-blur-lg border-b border-gray-800 py-4 px-6"
+            className="md:hidden absolute top-16 left-0 right-0 z-30 bg-gradient-to-b from-gray-900 to-black border-b border-gray-800 py-4 px-6"
           >
             <div className="flex flex-col space-y-4">
               <Link href="#features" className="text-gray-300 hover:text-white font-medium transition-colors py-2">
@@ -201,18 +165,37 @@ export default function Home() {
       <main className="relative z-10">
         <>
           {/* Hero Section - Optimized for mobile and desktop */}
-          <section className="container mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-4">
+          <section className="container mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-4 relative overflow-hidden">
+            {/* Full-width grid background with fade-out effect - Fixed to viewport */}
+            <div className="fixed left-0 right-0 top-0 w-[100vw] h-[calc(100vh+45rem)] -z-10 overflow-hidden">
+              {/* Base grid pattern with reduced opacity */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+              
+              {/* Radial mask that creates the gradient effect - transparent in center, darker at edges */}
+              <div className="absolute inset-x-0 top-0 h-[50%] bg-radial-mask"></div>
+              
+              {/* Strong bottom fade-out effect precisely positioned to end before videos section */}
+              <div className="absolute left-0 right-0 bottom-0 h-[25%] bg-gradient-to-t from-black via-black/90 to-transparent"></div>
+              
+              {/* Additional strong fade for precise cutoff */}
+              <div className="absolute left-0 right-0 bottom-0 h-[5rem] bg-black"></div>
+            </div>
+            
+            {/* Content area with protective layer to improve text readability */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="max-w-5xl mx-auto text-center"
+              className="max-w-5xl mx-auto text-center relative z-10"
             >
+              {/* Subtle backdrop for improved text contrast - without blur */}
+              <div className="absolute inset-0 -z-10 bg-black/20 rounded-3xl transform scale-110"></div>
+              
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.7 }}
-                className="inline-flex items-center gap-1 sm:gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 sm:px-6 py-1.5 sm:py-3 mb-4 sm:mb-8 backdrop-blur-sm"
+                className="inline-flex items-center gap-1 sm:gap-2 bg-blue-500/20 border border-blue-500/30 rounded-full px-3 sm:px-6 py-1.5 sm:py-3 mb-4 sm:mb-8"
               >
                 <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
                 <span className="text-blue-300 text-xs sm:text-sm font-medium">Revolutionizing Education with AI</span>
@@ -244,7 +227,7 @@ export default function Home() {
                             placeholder={isMobile ? 
                               "What would you like to learn today?" : 
                               "What would you like to learn today? e.g. Explain me Quadratic Equations..."}
-                            className="h-12 sm:h-20 md:h-20 text-base lg:text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70 md:placeholder:pt- md:placeholder:leading-tight"
+                            className="h-18 sm:h-20 md:h-20 text-base lg:text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70 md:placeholder:pt- md:placeholder:leading-tight"
                             value={searchTopic}
                             onChange={(e) => setSearchTopic(e.target.value)}
                             onKeyPress={(e) => {
@@ -269,23 +252,32 @@ export default function Home() {
                     </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-6 sm:mb-12 px-2 sm:px-0">
-                <Button 
-                  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg font-semibold shadow-xl sm:shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden"
-                        onClick={handleGenerate}
-                        disabled={!searchTopic.trim()}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
-                        <Sparkles className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
-                        <span className="aesthetic-text">Generate Video</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full sm:w-auto text-gray-300 hover:text-white hover:bg-white/10 rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg border border-gray-700 backdrop-blur-sm transition-all duration-300 aesthetic-text"
-                        onClick={() => window.location.href = '#videos'}
-                >
-                  <Play className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
-                  Watch Demo
-                </Button>
+                <div className="w-full sm:w-auto relative">
+                  {/* Extra div with solid background for disabled state */}
+                  <div className={`absolute inset-0 ${searchTopic.trim() ? 'bg-blue-600' : 'bg-blue-600/50'} rounded-xl sm:rounded-2xl transition-colors duration-300`}></div>
+                  <Button 
+                    className="w-full sm:w-auto bg-transparent hover:bg-blue-500 text-white rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg font-semibold shadow-xl sm:shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden disabled:opacity-70 disabled:shadow-lg disabled:shadow-blue-600/10"
+                    onClick={handleGenerate}
+                    disabled={!searchTopic.trim()}
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
+                    <Sparkles className={`mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`} />
+                    <span className={`aesthetic-text ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`}>Generate Video</span>
+                  </Button>
+                </div>
+                
+                <div className="w-full sm:w-auto relative">
+                  {/* Extra div with solid background for demo button */}
+                  <div className="absolute inset-0 bg-black/60 rounded-xl sm:rounded-2xl"></div>
+                  <Button
+                    variant="ghost"
+                    className="w-full sm:w-auto text-gray-300 hover:text-white hover:bg-white/10 rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg border border-gray-700 transition-all duration-300 aesthetic-text relative overflow-hidden"
+                    onClick={() => window.location.href = '#videos'}
+                  >
+                    <Play className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
+                    Watch Demo
+                  </Button>
+                </div>
               </div>
                     
                     <div className="mt-4 sm:mt-8 w-full mx-auto relative py-2 sm:py-6">
@@ -327,7 +319,7 @@ export default function Home() {
                             ].map((example, index) => (
                               <motion.button
                                 key={index}
-                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-xs sm:text-sm whitespace-nowrap"
+                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/60 hover:bg-gray-800/70 text-gray-300 hover:text-white transition-all text-xs sm:text-sm whitespace-nowrap"
                                 whileHover={{ scale: 1.05, borderColor: "rgba(96, 165, 250, 0.5)" }}
                                 onClick={() => setSearchTopic(example)}
                               >
@@ -363,7 +355,7 @@ export default function Home() {
                             ].map((example, index) => (
                               <motion.button
                                 key={index}
-                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-xs sm:text-sm whitespace-nowrap"
+                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/60 hover:bg-gray-800/70 text-gray-300 hover:text-white transition-all text-xs sm:text-sm whitespace-nowrap"
                                 whileHover={{ scale: 1.05, borderColor: "rgba(96, 165, 250, 0.5)" }}
                                 onClick={() => setSearchTopic(example)}
                               >
@@ -402,7 +394,7 @@ export default function Home() {
                             ].map((example, index) => (
                               <motion.button
                                 key={index}
-                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-xs sm:text-sm whitespace-nowrap"
+                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/60 hover:bg-gray-800/70 text-gray-300 hover:text-white transition-all text-xs sm:text-sm whitespace-nowrap"
                                 whileHover={{ scale: 1.05, borderColor: "rgba(124, 58, 237, 0.5)" }}
                                 onClick={() => setSearchTopic(example)}
                               >
@@ -439,7 +431,7 @@ export default function Home() {
                             ].map((example, index) => (
                               <motion.button
                                 key={index}
-                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/30 hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all backdrop-blur-sm text-xs sm:text-sm whitespace-nowrap"
+                                className="p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-900/60 hover:bg-gray-800/70 text-gray-300 hover:text-white transition-all text-xs sm:text-sm whitespace-nowrap"
                                 whileHover={{ scale: 1.05, borderColor: "rgba(124, 58, 237, 0.5)" }}
                                 onClick={() => setSearchTopic(example)}
                               >
@@ -468,7 +460,7 @@ export default function Home() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="absolute inset-0 bg-black/60 backdrop-blur-md"
+                      className="absolute inset-0 bg-black/80"
                       onClick={() => setIsGenerating(false)}
                     />
                     
@@ -505,7 +497,7 @@ export default function Home() {
                                   opacity: isActive ? 1 : isCompleted ? 0.8 : 0.3,
                                   scale: isActive ? 1.05 : 1,
                                 }}
-                                className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-500 ${
+                                className={`relative p-6 rounded-2xl border transition-all duration-500 ${
                                   isActive
                                     ? "border-blue-500 bg-blue-500/10"
                                     : isCompleted
