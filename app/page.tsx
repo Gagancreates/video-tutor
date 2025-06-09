@@ -104,7 +104,7 @@ export default function Home() {
       <main className="relative z-10">
         <>
           {/* Hero Section - Adjusted to fit screen properly */}
-          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-14">
+          <section className="container mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -195,113 +195,143 @@ export default function Home() {
                       )}
                     </div>
                   </motion.div>
-                ) : (
+                ) : null}
+              </AnimatePresence>
+              
+              {/* Modal Overlay for Video Generation */}
+              <AnimatePresence>
+                {isGenerating && (
                   <motion.div
-                    key="generating"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center max-w-4xl mx-auto"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 flex items-center justify-center z-50"
                   >
-                    <h2 className="font-bold text-3xl md:text-4xl text-white mb-4">Creating Your Educational Video</h2>
-                    <p className="text-xl text-gray-300 mb-12">
-                      Topic: <span className="text-blue-400">{searchTopic}</span>
-                    </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                      {generationSteps.map((step, index) => {
-                        const isActive = index === generationStep
-                        const isCompleted = index < generationStep
-                        const IconComponent = step.icon
-
-                        return (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0.3, scale: 0.95 }}
-                            animate={{
-                              opacity: isActive ? 1 : isCompleted ? 0.8 : 0.3,
-                              scale: isActive ? 1.05 : 1,
-                            }}
-                            className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-500 ${
-                              isActive
-                                ? "border-blue-500 bg-blue-500/10"
-                                : isCompleted
-                                  ? "border-green-500 bg-green-500/10"
-                                  : "border-gray-700 bg-gray-900/30"
-                            }`}
-                          >
-                            <div className="flex items-center gap-4">
-                              <div
-                                className={`size-12 rounded-xl flex items-center justify-center ${
-                                  isActive
-                                    ? "bg-blue-500/20 border border-blue-500/30"
-                                    : isCompleted
-                                      ? "bg-green-500/20 border border-green-500/30"
-                                      : "bg-gray-700/20 border border-gray-600/30"
-                                }`}
-                              >
-                                {isActive ? (
-                                  <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
-                                ) : (
-                                  <IconComponent
-                                    className={`h-6 w-6 ${isCompleted ? "text-green-400" : "text-gray-400"}`}
-                                  />
-                                )}
-                              </div>
-                              <div className="text-left">
-                                <h3
-                                  className={`font-semibold text-lg ${
-                                    isActive ? "text-blue-400" : isCompleted ? "text-green-400" : "text-gray-400"
-                                  }`}
-                                >
-                                  {step.title}
-                                </h3>
-                                <p className="text-gray-300 text-sm">{step.description}</p>
-                              </div>
-                            </div>
-
-                            {isActive && (
-                              <motion.div
-                                initial={{ width: "0%" }}
-                                animate={{ width: "100%" }}
-                                transition={{ duration: 2 }}
-                                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-b-2xl"
-                              />
-                            )}
-                          </motion.div>
-                        )
-                      })}
-                    </div>
-
+                    {/* Backdrop with blur */}
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                      className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl p-8 border border-gray-800 backdrop-blur-sm mb-8"
-                    >
-                      <div className="flex items-center justify-center gap-3 mb-4">
-                        <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
-                        <span className="text-white font-medium">Processing...</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <motion.div
-                          initial={{ width: "0%" }}
-                          animate={{ width: `${((generationStep + 1) / generationSteps.length) * 100}%` }}
-                          transition={{ duration: 0.5 }}
-                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
-                        />
-                      </div>
-                      <p className="text-gray-400 text-sm mt-4 text-center">
-                        This usually takes 20-30 seconds. We're creating something amazing for you!
-                      </p>
-                    </motion.div>
-                    
-                    <Button
-                      variant="outline"
-                      className="text-gray-300 hover:text-white border-gray-600"
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 bg-black/60 backdrop-blur-md"
                       onClick={() => setIsGenerating(false)}
+                    />
+                    
+                    {/* Modal Content */}
+                    <motion.div
+                      key="generating-modal"
+                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                      className="relative bg-gradient-to-br from-gray-900/90 to-black/90 rounded-3xl border border-gray-700 p-8 md:p-12 text-center max-w-4xl mx-auto shadow-2xl z-10 overflow-hidden"
                     >
-                      Cancel
-                    </Button>
+                      {/* Decorative elements */}
+                      <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(79,70,229,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(79,70,229,0.03)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
+                      <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+                      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
+                      
+                      <div className="relative">
+                        <h2 className="font-bold text-3xl md:text-4xl text-white mb-4">Creating Your Educational Video</h2>
+                        <p className="text-xl text-gray-300 mb-12">
+                          Topic: <span className="text-blue-400">{searchTopic}</span>
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                          {generationSteps.map((step, index) => {
+                            const isActive = index === generationStep
+                            const isCompleted = index < generationStep
+                            const IconComponent = step.icon
+
+                            return (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0.3, scale: 0.95 }}
+                                animate={{
+                                  opacity: isActive ? 1 : isCompleted ? 0.8 : 0.3,
+                                  scale: isActive ? 1.05 : 1,
+                                }}
+                                className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-500 ${
+                                  isActive
+                                    ? "border-blue-500 bg-blue-500/10"
+                                    : isCompleted
+                                      ? "border-green-500 bg-green-500/10"
+                                      : "border-gray-700 bg-gray-900/30"
+                                }`}
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div
+                                    className={`size-12 rounded-xl flex items-center justify-center ${
+                                      isActive
+                                        ? "bg-blue-500/20 border border-blue-500/30"
+                                        : isCompleted
+                                          ? "bg-green-500/20 border border-green-500/30"
+                                          : "bg-gray-700/20 border border-gray-600/30"
+                                    }`}
+                                  >
+                                    {isActive ? (
+                                      <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
+                                    ) : (
+                                      <IconComponent
+                                        className={`h-6 w-6 ${isCompleted ? "text-green-400" : "text-gray-400"}`}
+                                      />
+                                    )}
+                                  </div>
+                                  <div className="text-left">
+                                    <h3
+                                      className={`font-semibold text-lg ${
+                                        isActive ? "text-blue-400" : isCompleted ? "text-green-400" : "text-gray-400"
+                                      }`}
+                                    >
+                                      {step.title}
+                                    </h3>
+                                    <p className="text-gray-300 text-sm">{step.description}</p>
+                                  </div>
+                                </div>
+
+                                {isActive && (
+                                  <motion.div
+                                    initial={{ width: "0%" }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 2 }}
+                                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-b-2xl"
+                                  />
+                                )}
+                              </motion.div>
+                            )
+                          })}
+                        </div>
+
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 }}
+                          className="bg-gradient-to-br from-gray-900/70 to-black/70 rounded-2xl p-8 border border-gray-800 backdrop-blur-sm mb-8"
+                        >
+                          <div className="flex items-center justify-center gap-3 mb-4">
+                            <Loader2 className="h-6 w-6 text-blue-400 animate-spin" />
+                            <span className="text-white font-medium">Processing...</span>
+                          </div>
+                          <div className="w-full bg-gray-700/50 rounded-full h-2">
+                            <motion.div
+                              initial={{ width: "0%" }}
+                              animate={{ width: `${((generationStep + 1) / generationSteps.length) * 100}%` }}
+                              transition={{ duration: 0.5 }}
+                              className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                            />
+                          </div>
+                          <p className="text-gray-400 text-sm mt-4 text-center">
+                            This usually takes 20-30 seconds. We're creating something amazing for you!
+                          </p>
+                        </motion.div>
+                        
+                        <Button
+                          variant="outline"
+                          className="text-gray-300 hover:text-white border-gray-600 hover:bg-gray-800/50"
+                          onClick={() => setIsGenerating(false)}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
