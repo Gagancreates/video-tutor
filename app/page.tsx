@@ -169,7 +169,7 @@ export default function Home() {
             {/* Full-width grid background with fade-out effect - Fixed to viewport */}
             <div className="fixed left-0 right-0 top-0 w-[100vw] h-[calc(100vh+45rem)] -z-10 overflow-hidden">
               {/* Base grid pattern with slightly increased opacity */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.10)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.13)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.14)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
               
               {/* Radial mask that creates the gradient effect - transparent in center, darker at edges */}
               <div className="absolute inset-x-0 top-0 h-[50%] bg-radial-mask"></div>
