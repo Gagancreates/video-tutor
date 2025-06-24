@@ -73,8 +73,8 @@ export default function Home() {
           className="flex items-center gap-2 sm:gap-3"
         >
           <div className="relative group">
-            <div className="size-10 sm:size-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/30">
-              <Brain className="text-white h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="size-10 sm:size-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/30 overflow-hidden">
+              <img src="/images/v4.png" alt="EduTutor Logo" className="w-full h-full object-contain rounded-xl" />
             </div>
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 blur-md opacity-50 -z-10 transition-all duration-300 group-hover:opacity-70 group-hover:blur-lg" />
           </div>
@@ -916,8 +916,8 @@ export default function Home() {
                     <div className="text-3xl text-blue-400 mb-4">"</div>
                     <p className="text-gray-300 mb-8 leading-relaxed">{testimonial.quote}</p>
                     <div className="flex items-center gap-4">
-                      <div className="size-12 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-white font-bold">
-                        {testimonial.author[0]}
+                      <div className="size-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+                        <img src="/images/v4.png" alt="EduTutor Logo" className="w-full h-full object-contain rounded-lg" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-white">{testimonial.author}</h4>
@@ -968,8 +968,8 @@ export default function Home() {
         <div className="grid md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="size-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <Brain className="text-white h-5 w-5" />
+              <div className="size-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+                <img src="/images/v4.png" alt="EduTutor Logo" className="w-full h-full object-contain rounded-lg" />
               </div>
               <span className="font-bold text-xl text-white">EduTutor</span>
             </div>
