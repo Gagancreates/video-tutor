@@ -222,64 +222,64 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -30 }}
                   >
-                    <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
-                          <div className="relative group">
-                          <Input
-                            placeholder={isMobile ? 
-                              "What would you like to learn today?" : 
-                              "What would you like to learn today? e.g. Explain me Quadratic Equations..."}
-                            className="h-18 sm:h-20 md:h-20 text-base lg:text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70 md:placeholder:pt- md:placeholder:leading-tight"
-                            value={searchTopic}
-                            onChange={(e) => setSearchTopic(e.target.value)}
-                            onKeyPress={(e) => {
-                              if (e.key === "Enter" && searchTopic.trim()) {
-                                handleGenerate();
-                              }
-                            }}
-                          />
-                          {/* Enhanced glow effect */}
-                          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10 opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
-                          
-                          {/* Enhanced animated glow border */}
-                          <div className="absolute inset-0 -z-10 rounded-2xl sm:rounded-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-300">
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/40 to-blue-500/30 bg-[length:200%_100%] rounded-2xl sm:rounded-3xl animate-glow"></div>
-                          </div>
-
-                          {/* Sparkle icon inside input */}
-                          <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-blue-400/50 group-hover:text-blue-400/70 transition-colors duration-300">
-                            <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
-                          </div>
+                    <div className="max-w-2xl mx-auto mb-6 sm:mb-8 relative">
+                      {/* Silver glow background */}
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 sm:w-[36rem] sm:h-40 bg-[radial-gradient(ellipse_at_center,_rgba(192,192,192,0.45)_0%,_rgba(192,192,192,0.15)_60%,_transparent_100%)] blur-2xl z-0 pointer-events-none" />
+                      <div className="relative group z-10">
+                        <Input
+                          placeholder={isMobile ? 
+                            "What would you like to learn today?" : 
+                            "What would you like to learn today? e.g. Explain me Quadratic Equations..."}
+                          className="h-18 sm:h-20 md:h-20 text-base lg:text-base sm:text-xl rounded-2xl sm:rounded-3xl border-2 border-gray-600 bg-gray-900/60 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm px-4 sm:px-8 shadow-lg transition-all duration-300 focus:border-blue-500/70 md:placeholder:pt- md:placeholder:leading-tight"
+                          value={searchTopic}
+                          onChange={(e) => setSearchTopic(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter" && searchTopic.trim()) {
+                              handleGenerate();
+                            }
+                          }}
+                        />
+                        {/* Enhanced glow effect */}
+                        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10 opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
+                        {/* Enhanced animated glow border */}
+                        <div className="absolute inset-0 -z-10 rounded-2xl sm:rounded-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-300">
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/40 to-blue-500/30 bg-[length:200%_100%] rounded-2xl sm:rounded-3xl animate-glow"></div>
                         </div>
+                        {/* Sparkle icon inside input */}
+                        <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-blue-400/50 group-hover:text-blue-400/70 transition-colors duration-300">
+                          <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
                     </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-6 sm:mb-12 px-2 sm:px-0">
-                <div className="w-full sm:w-auto relative">
-                  {/* Extra div with solid background for disabled state */}
-                  <div className={`absolute inset-0 ${searchTopic.trim() ? 'bg-blue-600' : 'bg-blue-600/50'} rounded-xl sm:rounded-2xl transition-colors duration-300`}></div>
-                  <Button 
-                    className="w-full sm:w-auto bg-transparent hover:bg-blue-500 text-white rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg font-semibold shadow-xl sm:shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden disabled:opacity-70 disabled:shadow-lg disabled:shadow-blue-600/10"
-                    onClick={handleGenerate}
-                    disabled={!searchTopic.trim()}
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
-                    <Sparkles className={`mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`} />
-                    <span className={`aesthetic-text ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`}>Generate Video</span>
-                  </Button>
-                </div>
-                
-                <div className="w-full sm:w-auto relative">
-                  {/* Extra div with solid background for demo button */}
-                  <div className="absolute inset-0 bg-black/60 rounded-xl sm:rounded-2xl"></div>
-                  <Button
-                    variant="ghost"
-                    className="w-full sm:w-auto text-gray-300 hover:text-white hover:bg-white/10 rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg border border-gray-700 transition-all duration-300 aesthetic-text relative overflow-hidden"
-                    onClick={() => window.location.href = '#videos'}
-                  >
-                    <Play className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
-                    Watch Demo
-                  </Button>
-                </div>
-              </div>
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-6 sm:mb-12 px-2 sm:px-0">
+                      <div className="w-full sm:w-auto relative">
+                        {/* Extra div with solid background for disabled state */}
+                        <div className={`absolute inset-0 ${searchTopic.trim() ? 'bg-blue-600' : 'bg-blue-600/50'} rounded-xl sm:rounded-2xl transition-colors duration-300`}></div>
+                        <Button 
+                          className="w-full sm:w-auto bg-transparent hover:bg-blue-500 text-white rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg font-semibold shadow-xl sm:shadow-2xl shadow-blue-600/25 border border-blue-500/20 group transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden disabled:opacity-70 disabled:shadow-lg disabled:shadow-blue-600/10"
+                          onClick={handleGenerate}
+                          disabled={!searchTopic.trim()}
+                        >
+                          <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-text-shimmer"></span>
+                          <Sparkles className={`mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`} />
+                          <span className={`aesthetic-text ${!searchTopic.trim() ? 'opacity-70' : 'opacity-100'} transition-opacity duration-300`}>Generate Video</span>
+                        </Button>
+                      </div>
+                      
+                      <div className="w-full sm:w-auto relative">
+                        {/* Extra div with solid background for demo button */}
+                        <div className="absolute inset-0 bg-black/60 rounded-xl sm:rounded-2xl"></div>
+                        <Button
+                          variant="ghost"
+                          className="w-full sm:w-auto text-gray-300 hover:text-white hover:bg-white/10 rounded-xl sm:rounded-2xl h-12 sm:h-14 md:h-16 px-4 sm:px-8 md:px-10 text-sm sm:text-lg border border-gray-700 transition-all duration-300 aesthetic-text relative overflow-hidden"
+                          onClick={() => window.location.href = '#videos'}
+                        >
+                          <Play className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
+                          Watch Demo
+                        </Button>
+                      </div>
+                    </div>
                     
                     <div className="mt-4 sm:mt-8 w-full mx-auto relative py-2 sm:py-6">
                       <p className="text-gray-400 text-xs sm:text-sm mb-2 sm:mb-4 text-center">Try asking about...</p>
