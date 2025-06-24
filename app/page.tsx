@@ -7,6 +7,7 @@ import { ArrowRight, Github, Play, Sparkles, Brain, Zap, Users, BookOpen, Trendi
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export default function Home() {
   const [searchTopic, setSearchTopic] = useState("")
@@ -73,8 +74,8 @@ export default function Home() {
           className="flex items-center gap-2 sm:gap-3"
         >
           <div className="relative group">
-            <div className="size-10 sm:size-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/30">
-              <Brain className="text-white h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="size-10 sm:size-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/30 relative overflow-hidden">
+              <Image src="/images/v4.png" alt="EduTutor Logo" fill style={{objectFit: 'contain'}} />
             </div>
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 blur-md opacity-50 -z-10 transition-all duration-300 group-hover:opacity-70 group-hover:blur-lg" />
           </div>

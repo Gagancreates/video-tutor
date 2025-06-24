@@ -37,6 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/png" href="/images/v4.png" />
+      </head>
       <body className={`${inter.variable} ${satoshi.variable} font-inter antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           {children}
